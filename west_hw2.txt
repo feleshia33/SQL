@@ -1,0 +1,89 @@
+-- Get the numbers of the teams of which the player with the name Parmenter 
+-- and initial R is a member; in this example, we assume that no two players have the same name and initials.
+
+-- select t.teamno
+-- from players pl
+-- join teams t
+-- using(playerno)
+-- where name = 'Parmenter'
+-- AND initials = 'R';
+
+-- RESULTS
+teamno		
+1
+
+
+-- For each penalty, find the payment number, the amount, and the number and name of the player who incurred it.
+
+-- select pl.name as player, pl.playerno, pe.paymentno, pe.amount 
+-- from penalties pe
+-- join players pl
+-- using(playerno)
+
+-- RESULTS
+player		playerno	paymentno	amount
+Parmenter	6		1		100.00
+Baker		44		2		75.00
+Collins		27		3		100.00
+Moorman		104		4		50.00
+Baker		44		5		25.00
+Newcastle	8		6		25.00
+Baker		44		7		30.00
+Collins		27		8		75.00
+
+
+-- For ALL players, get the player number and a list of the numbers of teams for which they have ever played. 
+-- Some players may not have played for teams in the database. Hint a JOIN of some kind is needed.
+-- select pl.playerno, t.teamno
+-- from players pl
+-- left join teams t
+-- on pl.playerno = t.playerno;
+
+-- RESULTS
+playerno	teamno
+2		NULL
+6		1
+7	 	NULL
+8		NULL
+27		2
+28		NULL
+39		NULL
+44		NULL
+57		NULL
+83		NULL
+95		NULL
+100		NULL
+104		NULL
+112		NULL
+
+
+-- Get the number of each player who won at least one match. A win from matches is more wins than losses.
+-- select pl.playerno, pl.name
+-- from players pl 
+-- join matches m
+-- on m.playerno = pl.playerno
+-- where won > lost
+-- group by pl.playerno;
+
+-- RESULTS
+playerno
+6	
+44	
+57	
+27	
+104	
+
+
+-- Get the payment numbers of the penalties incurred by players who were born after 1965.
+-- select pen.paymentno
+-- from PENALTIES pen
+-- join players pl
+-- using(playerno)
+-- where birth_date > '1965-12-31';
+
+-- RESULTS
+paymentno
+4		
+
+
+
