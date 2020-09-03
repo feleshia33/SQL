@@ -1,0 +1,88 @@
+-- Find the number of penalties and the highest penalty amount.
+select count(paymentno) as "# of penalties",
+max(amount) as "Highest"
+from PENALTIES;
+
+--RESULTS
+# of penalties	Highest
+8		100.00
+
+
+
+-- For each player, get the player number and the difference between his or her lowest and highest penalty amounts.
+select pl.playerno, 
+max(amount)- min(amount) as difference
+from players as pl
+left join PENALTIES as pe
+using(playerno)
+group by pl.playerno;
+
+
+--RESULTS
+playerno	difference
+2		NULL
+6		0.00
+7		NULL
+8		0.00
+27		25.00
+28		NULL
+39		NULL
+44		50.00
+57		NULL
+83		NULL
+95		NULL
+100		NULL
+104		0.00
+112		NULL
+
+
+-- For each team that has played in the first division, give the team number, number of matches, and total number of sets won.
+select t.teamno, 
+count(*) as "# of matches",
+sum(won) as "sets won"
+from matches as m
+join teams as t
+using(teamno)
+where t.division = "first"
+group by m.teamno; 
+
+
+--RESULTS
+teamno	# of matches	sets won
+1		8	15
+
+
+-- Get the name and initials of each player who has incurred two or more penalties of more -- than $40.
+select pl.name,
+pl.initials
+from players pl
+join PENALTIES pe
+using(playerno)
+where pe.amount > 40
+group by pl.name, pl.initials
+having count(*) >= 2;
+
+--RESULTS
+name		initials
+Collins		DD
+
+
+-- Get the match numbers of the matches with the two highest numbers and also the two lowest numbers.
+(select matchno
+from matches
+order by matchno asc 
+limit 2)
+union
+(select matchno
+from matches
+order by matchno desc
+limit 2)
+
+--RESULTS
+matchno
+1
+2
+13
+12
+
+
