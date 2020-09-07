@@ -1,0 +1,46 @@
+-- HINT: Many of these changes can be done through MySQLWorkbench by clicking on the wrench symbol in the schema window for the table. 
+-- MySQLWorkbench will then display the SQL code it generates for the changes you have selected using the table editor.
+
+-- Add a new column called Founded of type date to the TEAMS table after the TEAMNO.
+-- Add a new column called Paid of type char (1) to the PENALTIES table.
+-- In the PENALTIES table, change the column name AMOUNT to PENALTY_AMOUNT.
+-- Add a new column called Date of type date to the MATCHES table.
+-- In the MATCHES table, change the column name MATCHNO to MATCH. MATCH is a keyword but this can be done.
+
+
+-- SELECT * FROM TEAMS;
+-- SELECT * FROM PENALTIES;
+-- SELECT * FROM MATCHES;
+
+-- RESULTS
+TEAMNO	FOUNDED		PLAYERNO	DIVISION
+1	NULL		6		first
+2	NULL		27		second
+
+
+PAYMENTNO	PLAYERNO	PAYMENT_DATE	PENALTY_AMOUNT	PAID
+1		6		1980-12-08	200.00		NULL
+2		44		1981-05-05	150.00		NULL
+3		27		1983-09-10	200.00		NULL
+7		44		1982-12-30	60.00		NULL
+8		27		1984-11-12	150.00		NULL
+11		44		1985-11-08	200.00		NULL
+
+
+MATCH	TEAMNO	PLAYERNO	WON	LOST	DATE
+1	1	6		3	1	NULL
+2	1	6		2	3	NULL
+3	1	6		3	0	NULL
+4	1	44		3	2	NULL
+5	1	83		0	3	NULL
+6	1	2		1	3	NULL
+7	1	57		3	0	NULL
+8	1	8		0	3	NULL
+9	2	27		3	2	NULL
+11	2	112		2	3	NULL
+12	2	112		1	3	NULL
+13	2	8		0	3	NULL
+
+
+
+
