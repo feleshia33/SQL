@@ -1,0 +1,16 @@
+This query combines three tables of data to show the country code, name, region, year, fertility rate, and unemployment rate for each country. Aliases are used for each table and idenitifer. 
+
+
+-- Select fields
+SELECT c.code, name, region, e.year, fertility_rate, unemployment_rate
+  -- From countries (alias as c)
+  FROM countries AS c
+  -- Join to populations (as p)
+  INNER JOIN populations AS p
+    -- Match on country code
+    ON c.code = p.country_code
+  -- Join to economies (as e)
+  INNER JOIN economies AS e
+    -- Match on country code and year
+    ON c.code = e.code
+    and p.year = e.year;
