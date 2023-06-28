@@ -1,16 +1,67 @@
-This query combines three tables of data to show the country code, name, region, year, fertility rate, and unemployment rate for each country. Aliases are used for each table and idenitifer. 
 
+This query combines two tables of data to show country code, country name, year, and fertility rate per country. Aliases are used for each table.
+
+-- Select fields 
+SELECT code, name, region, year, fertility_rate
+-- From countries (alias as c)
+  FROM countries as c
+-- Join to populations (as p)
+  INNER JOIN populations as p
+-- Match on country code 
+  ON c.code = p.country_code
+
+
+
+This query combines three tables of data to show the country code, name, region, year, fertility rate, and unemployment rate for each country. Aliases are used for each table and identifier. 
 
 -- Select fields
 SELECT c.code, name, region, e.year, fertility_rate, unemployment_rate
-  -- From countries (alias as c)
+-- From countries (alias as c)
   FROM countries AS c
-  -- Join to populations (as p)
+-- Join to populations (as p)
   INNER JOIN populations AS p
-    -- Match on country code
+-- Match on country code
     ON c.code = p.country_code
-  -- Join to economies (as e)
+-- Join to economies (as e)
   INNER JOIN economies AS e
-    -- Match on country code and year
+-- Match on country code and year
     ON c.code = e.code
-    and p.year = e.year;
+    AND p.year = e.year;
+
+
+
+This query combines two tables with USING. Aliases are used for each table and identifier.
+
+-- Select fields with aliases
+SELECT c.name as country, c.continent, l.name as language, l.official
+-- From counries (alias as c)
+  FROM countries c
+-- Join to languages (as l)
+  INNER JOIN languages l
+-- Match on code utilizing using
+  USING (code)
+
+
+
+This query is a self-join that queries the size of each country and categorizes it by year, 2010 and 2015 respectively. 
+
+-- Select fields with aliases
+SELECT p1.country_code, p1.size as size2010, p2.size as size2015
+-- From populations (alias as p1)
+  FROM populations p1
+-- Join to itself (alias as p2)
+  JOIN populations p2
+-- Match on country code
+  ON p1.country_code = p2.country_code
+
+
+
+
+
+
+
+
+--Data Set can be viewed here after login (free): https://app.datacamp.com/learn/courses/sql-for-joining-data 
+
+
+
